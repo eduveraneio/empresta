@@ -9,44 +9,58 @@ class Credito extends Model
 {
     public function collection($request)
     {
-        $collection = $this->getJsonCollection($request);
-        $collection = $this->getResultCollection($collection, $request->valor_emprestimo);
+        $collection = $this->getJsonCollection();
+        
+        if(count($request->instituicoes))
+            $collection = $collection->whereIn('instituicao', $request->instituicoes);
+        
+        if(count($request->convenios))
+            $collection = $collection->whereIn('convenio', $request->convenios);
+
+        if($request->parcela)
+            $collection = $collection->where('parcelas', $request->parcela);
+        
+        $collection = $this->getResultCollection($collection->values(), $request->valor_emprestimo);
 
         return $collection;
     }
 
-    public function getJsonCollection($request)
+    public function getJsonCollection()
     {
         $file = dirname(__DIR__).'/Files/taxas_instituicoes.json';
         $data = json_decode(file_get_contents($file));
 
-        $collection = collect($data);
+        $collection = collect();
 
-        if(count($request->instituicoes)>0)
-            $collection = $collection->whereIn('instituicao',$request->instituicoes);
-        
-        if(count($request->convenios)>0)
-            $collection = $collection->whereIn('convenio',$request->convenios);
-        
-        //$collection = $collection->whereIn('parcelas',$request->parcela);
-
+        for($i=0; $i<sizeof($data); $i++) {
+            $collection->put($i, [
+                'parcelas' => $data[$i]->parcelas, 
+                'taxaJuros' => $data[$i]->taxaJuros,
+                'coeficiente' => $data[$i]->coeficiente,
+                'convenio' => $data[$i]->convenio,
+                'instituicao' => $data[$i]->instituicao
+            ]);
+        }
+            
         return $collection;
     }
 
-    public function getResultCollection($collection, $valor)
+    public function getResultCollection($data, $valor)
     {
-        $result = collect();
+        $collection = collect();
 
-        for($i=0; $i<count($collection); $i++) {
-            $result->put($i, [
-                'taxa' => $collection[$i]->taxaJuros, 
-                'parcelas' => $collection[$i]->parcelas,
-                'valor_parcela' => number_format($collection[$i]->coeficiente*$valor,2),
-                'convenio' => $collection[$i]->convenio,
-                'instituicao' => $collection[$i]->instituicao
+        for($i=0; $i<sizeof($data); $i++) {
+            $collection->put($i, [
+                'taxa' => $data[$i]['taxaJuros'], 
+                'parcelas' => $data[$i]['parcelas'],
+                'valor_parcela' => number_format($data[$i]['coeficiente']*$valor,2),
+                'convenio' => $data[$i]['convenio'],
+                'instituicao' => $data[$i]['instituicao']
             ]);
         }
         
-        return $result->groupBy(['instituicao'], $preserveKeys = false);
+        $collection = $collection->groupBy(['instituicao'], $preserveKeys = false);
+
+        return $collection;
     }
 }

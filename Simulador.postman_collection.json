@@ -11,7 +11,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8001/api/instituicao",
+					"raw": "http://127.0.0.1:8000/api/instituicao",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -19,7 +19,7 @@
 						"0",
 						"1"
 					],
-					"port": "8001",
+					"port": "8000",
 					"path": [
 						"api",
 						"instituicao"
@@ -34,7 +34,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8001/api/convenio",
+					"raw": "http://127.0.0.1:8000/api/convenio",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -42,7 +42,7 @@
 						"0",
 						"1"
 					],
-					"port": "8001",
+					"port": "8000",
 					"path": [
 						"api",
 						"convenio"
@@ -58,7 +58,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"valor_emprestimo\": 11750.00,\n    \"instituicoes\": [\"BMG\"],\n    \"convenios\": [\"INSS\", \"FEDERAL\", \"SIAPE\"],\n    \"parcela\": 60\n}\n",
+					"raw": "{\n    \"valor_emprestimo\": 11750.00,\n    \"instituicoes\": [\"BMG\"],\n    \"convenios\": [\"INSS\", \"FEDERAL\", \"SIAPE\"],\n    \"parcela\": \"\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,7 +66,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8001/api/credito",
+					"raw": "http://127.0.0.1:8000/api/credito",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -74,7 +74,7 @@
 						"0",
 						"1"
 					],
-					"port": "8001",
+					"port": "8000",
 					"path": [
 						"api",
 						"credito"
