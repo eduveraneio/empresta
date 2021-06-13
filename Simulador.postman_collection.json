@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "5877fadf-9682-410a-8fef-fadca4f9f6e4",
+		"name": "Simulador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Retornar Instituições",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8001/api/instituicao",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"api",
+						"instituicao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retornar Convênios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8001/api/convenio",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"api",
+						"convenio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Simular Crédito",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"valor_emprestimo\": 11750.00,\n    \"instituicoes\": [\"BMG\"],\n    \"convenios\": [\"INSS\", \"FEDERAL\", \"SIAPE\"],\n    \"parcela\": 60\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8001/api/credito",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8001",
+					"path": [
+						"api",
+						"credito"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
