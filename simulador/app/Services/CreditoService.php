@@ -14,11 +14,6 @@ class CreditoService
         $this->creditoRepository = $creditoRepository;
     }
 
-    public function listar()
-    {
-        return $this->creditoRepository->listar();
-    }
-
     function simular($request)
     {        
         $validator = Validator::make($request->all(), [

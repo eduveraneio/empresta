@@ -16,6 +16,5 @@ class InstituicaoService
     public function retornar()
     {     
         return $this->instituicaoRepository->retornar();
-
     }
 }
