@@ -22,12 +22,9 @@ class Credito extends Model
 
         $collection = collect($data);
 
-        if(count($request->instituicoes)>0)
-            $collection = $collection->whereIn('instituicao',$request->instituicoes);
-        if(count($request->convenios)>0)
-            $collection = $collection->whereIn('convenio',$request->convenios);
-        if($request->parcela)
-            $collection = $collection->whereIn('parcelas',$request->parcela);
+        $collection = $collection->whereIn('instituicao',$request->instituicoes);
+        $collection = $collection->whereIn('convenio',$request->convenios);
+        //$collection = $collection->whereIn('parcelas',$request->parcela);
 
         return $collection;
     }
