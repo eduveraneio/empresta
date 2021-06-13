@@ -23,7 +23,7 @@ class Credito extends Model
         $collection = collect($data);
         $collection = $collection->whereIn('instituicao',$request->instituicoes);
         $collection = $collection->whereIn('convenio',$request->convenios);
-        //$collection = $collection->whereIn('parcelas',$request->parcela);
+        $collection = $collection->whereIn('parcelas',$request->parcela);
 
         return $collection;
     }
